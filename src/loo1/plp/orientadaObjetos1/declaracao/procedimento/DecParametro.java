@@ -60,7 +60,8 @@ public class DecParametro {
      *          <code>false</code> caso contrario.
      */
     public boolean checaTipo(AmbienteCompilacaoOO1 ambiente)throws ClasseNaoDeclaradaException {
-        return tipo.eValido(ambiente);
+        return tipo.eValido(ambiente) && 
+        	   (!(parametro instanceof ParametroOpcional) || tipo.equals(((ParametroOpcional) parametro).getValorPadrao().getTipo(ambiente)));
     }
 
     /**
