@@ -4,6 +4,7 @@ import loo1.plp.expressions2.memory.VariavelJaDeclaradaException;
 import loo1.plp.expressions2.memory.VariavelNaoDeclaradaException;
 import loo1.plp.imperative1.util.Lista;
 import loo1.plp.orientadaObjetos1.excecao.declaracao.ClasseNaoDeclaradaException;
+import loo1.plp.orientadaObjetos1.excecao.declaracao.ParametroRequeridoAposOpcionalException;
 import loo1.plp.orientadaObjetos1.memoria.AmbienteCompilacaoOO1;
 import loo1.plp.orientadaObjetos1.memoria.AmbienteExecucaoOO1;
 /**
@@ -69,6 +70,13 @@ public class ListaDeclaracaoParametro extends Lista<DecParametro>{
             if(getTail() != null) {
                 resposta = getHead().checaTipo(ambiente) &&
 				 			((ListaDeclaracaoParametro)getTail()).checaTipo(ambiente);
+                
+                Parametro parametroAtual = getHead().getParametro();
+                Parametro proximoParametro = getTail().getHead().getParametro();
+                
+                if (parametroAtual instanceof ParametroOpcional && proximoParametro instanceof ParametroRequerido) {
+                	throw new ParametroRequeridoAposOpcionalException(proximoParametro);
+                }
             }
             else {
                 resposta = getHead().checaTipo(ambiente);
