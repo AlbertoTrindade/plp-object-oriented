@@ -4,12 +4,12 @@ import loo1.plp.orientadaObjetos1.expressao.leftExpression.Id;
 
 public class ParametroRequerido extends Parametro {
 	
-	public ParametroRequerido(Id parametroId) {
-		setParametroId(parametroId);
+	public ParametroRequerido(Id id) {
+		setId(id);
 	}
 
 	@Override
 	public String toString() {
-		return getParametroId().toString();
+		return getId().toString();
 	}
 }

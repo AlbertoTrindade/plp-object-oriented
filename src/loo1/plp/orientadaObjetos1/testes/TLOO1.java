@@ -17,6 +17,7 @@ import loo1.plp.orientadaObjetos1.declaracao.procedimento.DecParametro;
 import loo1.plp.orientadaObjetos1.declaracao.procedimento.DecProcedimentoComposta;
 import loo1.plp.orientadaObjetos1.declaracao.procedimento.DecProcedimentoSimples;
 import loo1.plp.orientadaObjetos1.declaracao.procedimento.ListaDeclaracaoParametro;
+import loo1.plp.orientadaObjetos1.declaracao.procedimento.ParametroRequerido;
 import loo1.plp.orientadaObjetos1.declaracao.variavel.CompostaDecVariavel;
 import loo1.plp.orientadaObjetos1.declaracao.variavel.DecVariavelObjeto;
 import loo1.plp.orientadaObjetos1.declaracao.variavel.SimplesDecVariavel;
@@ -128,7 +129,7 @@ public class TLOO1{
          new DecProcedimentoSimples
           (
            new Id("insere"),
-           new ListaDeclaracaoParametro(new DecParametro(new Id("v"), new TipoPrimitivo(1))),
+           new ListaDeclaracaoParametro(new DecParametro(new ParametroRequerido(new Id("v")), new TipoPrimitivo(1))),
            new ComDeclaracao
             (
              new SimplesDecVariavel( new TipoClasse(new Id("LValor")),new Id("aux") , new This()),
@@ -180,7 +181,7 @@ public class TLOO1{
            (
              new Id("remove")
             ,
-             new ListaDeclaracaoParametro(new DecParametro( new Id("v"), new TipoPrimitivo(1)))
+             new ListaDeclaracaoParametro(new DecParametro(new ParametroRequerido(new Id("v")), new TipoPrimitivo(1)))
             ,
              new ComDeclaracao
               (

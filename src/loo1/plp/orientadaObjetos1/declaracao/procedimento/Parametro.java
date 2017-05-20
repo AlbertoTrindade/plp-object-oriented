@@ -4,14 +4,14 @@ import loo1.plp.orientadaObjetos1.expressao.leftExpression.Id;
 
 public abstract class Parametro {
 
-	private Id parametroId;
+	private Id id;
 	
-	public Id getParametroId() {
-		return parametroId;
+	public Id getId() {
+		return id;
 	}
 
-	public void setParametroId(Id parametroId) {
-		this.parametroId = parametroId;
+	public void setId(Id id) {
+		this.id = id;
 	}
 	
 	@Override

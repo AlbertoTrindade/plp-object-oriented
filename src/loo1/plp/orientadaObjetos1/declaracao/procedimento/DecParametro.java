@@ -3,7 +3,6 @@ package loo1.plp.orientadaObjetos1.declaracao.procedimento;
 import loo1.plp.expressions2.memory.VariavelJaDeclaradaException;
 import loo1.plp.expressions2.memory.VariavelNaoDeclaradaException;
 import loo1.plp.orientadaObjetos1.excecao.declaracao.ClasseNaoDeclaradaException;
-import loo1.plp.orientadaObjetos1.expressao.leftExpression.Id;
 import loo1.plp.orientadaObjetos1.memoria.AmbienteCompilacaoOO1;
 import loo1.plp.orientadaObjetos1.memoria.AmbienteExecucaoOO1;
 import loo1.plp.orientadaObjetos1.util.Tipo;
@@ -12,32 +11,32 @@ import loo1.plp.orientadaObjetos1.util.Tipo;
  */
 public class DecParametro {
     /**
-     * Identificador declarado.
+     * Parametro declarado.
      */
-    private Id id;
+    private Parametro parametro;
     /**
-     * Tipo do identificador declarado.
+     * Tipo do parametro declarado.
      */
     private Tipo tipo;
     /**
      * Construtor.
-     * @param id Identificador declarado.
-     * @param tipo Tipo do identificador declarado.
+     * @param parametro Parametro declarado.
+     * @param tipo Tipo do parametro declarado.
      */
-    public DecParametro(Id id, Tipo tipo){
-        this.id = id;
+    public DecParametro(Parametro parametro, Tipo tipo){
+        this.parametro = parametro;
         this.tipo = tipo;
     }
     /**
-     * Obt�m o identificador declarado.
-     * @return o identificador.
+     * Obt�m o parametro declarado.
+     * @return o parametro.
      */
-    public Id getId() {
-        return id;
+    public Parametro getParametro() {
+        return parametro;
     }
     /**
-     * Obt�m o tipo do identifador declarado.
-     * @return o tipo do identifador declarado.
+     * Obt�m o tipo do parametro declarado.
+     * @return o tipo do parametro declarado.
      */
     public Tipo getTipo() {
         return tipo;
@@ -75,7 +74,7 @@ public class DecParametro {
     public AmbienteCompilacaoOO1 declaraParametro(AmbienteCompilacaoOO1 ambiente)
         throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
 
-        ambiente.map(id, tipo);
+        ambiente.map(parametro.getId(), tipo);
         return ambiente;
     }
 }

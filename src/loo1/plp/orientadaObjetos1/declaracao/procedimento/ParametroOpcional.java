@@ -7,8 +7,8 @@ public class ParametroOpcional extends Parametro {
 	
 	private Expressao valorPadrao;
 	
-	public ParametroOpcional(Id parametroId, Expressao valorPadrao) {
-		setParametroId(parametroId);
+	public ParametroOpcional(Id id, Expressao valorPadrao) {
+		setId(id);
 		this.valorPadrao = valorPadrao;
 	}
 	
@@ -22,6 +22,6 @@ public class ParametroOpcional extends Parametro {
 	
 	@Override
 	public String toString() {
-		return getParametroId() + " = " + valorPadrao;
+		return getId() + " = " + valorPadrao;
 	}
 }

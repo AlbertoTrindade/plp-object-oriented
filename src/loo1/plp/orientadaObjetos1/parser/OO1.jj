@@ -143,11 +143,11 @@ options{  JAVA_UNICODE_ESCAPE = true;  STATIC = false;}PARSER_BEGIN(OO1Par
  **/ListaDeclaracaoParametro PListaDeclaracaoParametro() :{  ListaDeclaracaoParametro retorno;  DecParametro decPar;}{  (    LOOKAHEAD(PDecParametroAtomico() < COMMA >)    retorno = PDecParametroComposto()  | decPar = PDecParametroAtomico()    {      retorno = new ListaDeclaracaoParametro(decPar);    }  )  {    return retorno;  }}/**
  * ... Tipo Id "," ListaDeclaracaoParametro
  **/ListaDeclaracaoParametro PDecParametroComposto() :{  DecParametro d1;  ListaDeclaracaoParametro d2;}{  d1 = PDecParametroAtomico() < COMMA > d2 = PListaDeclaracaoParametro()  {    return new ListaDeclaracaoParametro(d1, d2);  }}/**
- * ...Tipo Id
- **/DecParametro PDecParametroAtomico() :{  DecParametro retorno;  Tipo tipo;  Id id;}{  tipo = PTipo() id = PId()  {    return new DecParametro(id, tipo);  }}/**
+ * ...Tipo Parametro
+ **/DecParametro PDecParametroAtomico() :{  DecParametro retorno;  Tipo tipo;  Parametro parametro;}{  tipo = PTipo() parametro = PParametro()  {    return new DecParametro(parametro, tipo);  }}/**
  * Tipo ::= TipoClasse | TipoPrimitivo
  **/Tipo PTipo() :{  Tipo tipo;}{  (    LOOKAHEAD(< STRING >  | < INT >  | < BOOLEAN >)    tipo = PTipoPrimitivo()  | tipo = PTipoClasse()  )  {    return tipo;  }}/**
  * TipoPrimitivo ::= "string" | "int" | "boolean"
  **/Tipo PTipoPrimitivo() :{  Tipo retorno;}{  (    LOOKAHEAD(< INT >)    < INT >    {      retorno = TipoPrimitivo.TIPO_INTEIRO;    }  | LOOKAHEAD(< BOOLEAN >)    < BOOLEAN >    {      retorno = TipoPrimitivo.TIPO_BOOLEANO;    }  | < STRING >    {      retorno = TipoPrimitivo.TIPO_STRING;    }  )  {    return retorno;  }}/**
  * TipoClasse ::= Id
- **/Tipo PTipoClasse() :{  Tipo retorno;  Id id;}{  (    id = PId()    {      retorno = new TipoClasse(id);    }  )  {    return retorno;  }}
+ **/Tipo PTipoClasse() :{  Tipo retorno;  Id id;}{  (    id = PId()    {      retorno = new TipoClasse(id);    }  )  {    return retorno;  }}/*** Parametro ::= ParametroRequerido | ParametroOpcional**/Parametro PParametro():{  Parametro parametro;}{	(	  LOOKAHEAD(PParametroOpcional())      parametro = PParametroOpcional() |      LOOKAHEAD(PParametroRequerido())      parametro = PParametroRequerido()	)	{		return parametro;	}}/*** ParametroRequerido  ::= Id**/Parametro PParametroRequerido () :{  Id id;}{  id = PId()  {    return new ParametroRequerido(id);  }}/*** ParametroOpcional ::= Id "=" Expressao**/Parametro PParametroOpcional() :{  Id id;  Expressao valorPadrao;}{  id = PId() < ASSIGN > valorPadrao = PExpressao()  {    return new ParametroOpcional(id, valorPadrao);  }}

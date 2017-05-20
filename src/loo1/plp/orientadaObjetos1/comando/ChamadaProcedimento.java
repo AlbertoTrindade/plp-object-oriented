@@ -91,7 +91,7 @@ public class ChamadaProcedimento implements Comando {
             listaValor = parametrosReais.avaliar(ambiente);
         }
         while (listaValor.length() > 0){
-            ambiente.map(parametrosFormais.getHead().getId(), listaValor.getHead());
+            ambiente.map(parametrosFormais.getHead().getParametro().getId(), listaValor.getHead());
             parametrosFormais = ((ListaDeclaracaoParametro) parametrosFormais.getTail());
             listaValor = (ListaValor)listaValor.getTail();
         }
