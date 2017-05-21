@@ -97,7 +97,7 @@ public class ListaDeclaracaoParametro extends Lista<DecParametro>{
      * @return o ambiente modificado pela declara��o do parametro.
      */
     public AmbienteCompilacaoOO1 declaraParametro(AmbienteCompilacaoOO1 ambiente)
-        throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
+        throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException, ClasseNaoDeclaradaException {
 
         AmbienteCompilacaoOO1 resposta;
         if(getHead() != null) {

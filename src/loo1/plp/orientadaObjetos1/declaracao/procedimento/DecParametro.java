@@ -73,8 +73,12 @@ public class DecParametro {
      * @return o ambiente modificado pela declara��o do parametro.
      */
     public AmbienteCompilacaoOO1 declaraParametro(AmbienteCompilacaoOO1 ambiente)
-        throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException {
-
+        throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException, ClasseNaoDeclaradaException {
+    	if (parametro instanceof ParametroOpcional) {
+        	ParametroOpcional parametroOpcional = (ParametroOpcional) parametro;
+        	parametroOpcional.getValorPadrao().checaTipo(ambiente);
+        }
+    	
         ambiente.map(parametro.getId(), tipo);
         return ambiente;
     }
