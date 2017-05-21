@@ -2,6 +2,8 @@ package loo1.plp.orientadaObjetos1.comando;
 
 import loo1.plp.orientadaObjetos1.comando.Comando;
 import loo1.plp.orientadaObjetos1.declaracao.procedimento.ListaDeclaracaoParametro;
+import loo1.plp.orientadaObjetos1.declaracao.procedimento.Parametro;
+import loo1.plp.orientadaObjetos1.declaracao.procedimento.ParametroRequerido;
 /**
  * Representa um procedimento.
  */
@@ -36,6 +38,28 @@ public class Procedimento {
      */
     public Comando getComando() {
         return comando;
+    }
+    
+    /**
+     * Obtem a quantidade de parametros obrigatorios
+     * @return quantidade de parametros obrigatorios
+     */
+    public int getAridadeRequerido() {
+    	int aridadeRequerido = 0;
+    	
+    	ListaDeclaracaoParametro listaParametrosAtual = parametrosFormais;
+    	
+    	while (listaParametrosAtual != null)  {
+    		Parametro parametroAtual = listaParametrosAtual.getHead().getParametro();
+    		
+    		if (parametroAtual instanceof ParametroRequerido) {
+    			aridadeRequerido++;
+    		}
+    		
+    		listaParametrosAtual = (ListaDeclaracaoParametro) listaParametrosAtual.getTail();
+    	}
+    	
+    	return aridadeRequerido;
     }
 
 }

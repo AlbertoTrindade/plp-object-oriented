@@ -116,8 +116,9 @@ public class ChamadaProcedimento implements Comando {
         ambiente.incrementa();
         ListaDeclaracaoParametro parametrosFormais = procedimento.getParametrosFormais();
         ListaTipo listaTipo = parametrosReais.getTipos(ambiente);
-        //tem o mesmo numero de parametros formais e reais?
-        if(listaTipo.length() == parametrosFormais.length()) {
+        // a quantidade de parâmetros reais está entre a dos formais requeridos e todos os formais?
+        if (procedimento.getAridadeRequerido() <= listaTipo.length() &&
+        	listaTipo.length() <= parametrosFormais.length()) {
             // a funcao tem algum parametro?
             if(listaTipo.head() == null || parametrosFormais.getHead() == null) {
                 resposta = true;
@@ -126,7 +127,7 @@ public class ChamadaProcedimento implements Comando {
                 resposta = true;
                 // tem parametros formais de tipos diferentes
                 // de parametros reais na ordem em que se apresentam?
-                while(listaTipo != null && parametrosFormais != null) {
+                while(listaTipo.head() != null && parametrosFormais != null) {
                     if( ! listaTipo.head().equals(parametrosFormais.getHead().getTipo())) {
                         resposta = false;
                         break;
