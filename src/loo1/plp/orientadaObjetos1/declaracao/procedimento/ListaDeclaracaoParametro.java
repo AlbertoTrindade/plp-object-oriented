@@ -1,6 +1,5 @@
 package loo1.plp.orientadaObjetos1.declaracao.procedimento;
 
-import loo1.plp.expressions2.memory.VariavelJaDeclaradaException;
 import loo1.plp.expressions2.memory.VariavelNaoDeclaradaException;
 import loo1.plp.imperative1.util.Lista;
 import loo1.plp.orientadaObjetos1.excecao.declaracao.ClasseNaoDeclaradaException;
@@ -66,7 +65,10 @@ public class ListaDeclaracaoParametro extends Lista<DecParametro>{
     public boolean checaTipo(AmbienteCompilacaoOO1 ambiente)
         throws VariavelNaoDeclaradaException, ClasseNaoDeclaradaException {
         boolean resposta;
+        
         if(getHead() != null) {
+        	ambiente.map(getHead().getParametro().getId(), getHead().getTipo());
+        	
             if(getTail() != null) {
                 resposta = getHead().checaTipo(ambiente) &&
 				 			((ListaDeclaracaoParametro)getTail()).checaTipo(ambiente);
@@ -85,34 +87,7 @@ public class ListaDeclaracaoParametro extends Lista<DecParametro>{
         else {
             resposta = true;
         }
+        
         return resposta;
     }
-
-    /**
-     * Cria um mapeamento do identificador para o tipo do parametro
-     * desta declara��o no AmbienteCompilacao
-     *
-     * @param ambiente o ambiente que contem o mapeamento entre identificador
-     *  e seu tipo.
-     * @return o ambiente modificado pela declara��o do parametro.
-     */
-    public AmbienteCompilacaoOO1 declaraParametro(AmbienteCompilacaoOO1 ambiente)
-        throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException, ClasseNaoDeclaradaException {
-
-        AmbienteCompilacaoOO1 resposta;
-        if(getHead() != null) {
-            if(getTail() != null) {
-                resposta = ((ListaDeclaracaoParametro)getTail()).declaraParametro(getHead().declaraParametro(ambiente));
-            }
-            else {
-                resposta = getHead().declaraParametro(ambiente);
-            }
-        }
-        else {
-            resposta = ambiente;
-        }
-        return resposta;
-    }
-
-
 }

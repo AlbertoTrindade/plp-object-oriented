@@ -3,6 +3,8 @@ package loo1.plp.orientadaObjetos1.comando;
 import loo1.plp.expressions2.memory.VariavelJaDeclaradaException;
 import loo1.plp.expressions2.memory.VariavelNaoDeclaradaException;
 import loo1.plp.orientadaObjetos1.declaracao.procedimento.ListaDeclaracaoParametro;
+import loo1.plp.orientadaObjetos1.declaracao.procedimento.Parametro;
+import loo1.plp.orientadaObjetos1.declaracao.procedimento.ParametroOpcional;
 import loo1.plp.orientadaObjetos1.excecao.declaracao.ClasseJaDeclaradaException;
 import loo1.plp.orientadaObjetos1.excecao.declaracao.ClasseNaoDeclaradaException;
 import loo1.plp.orientadaObjetos1.excecao.declaracao.ObjetoJaDeclaradoException;
@@ -11,6 +13,7 @@ import loo1.plp.orientadaObjetos1.excecao.declaracao.ProcedimentoJaDeclaradoExce
 import loo1.plp.orientadaObjetos1.excecao.declaracao.ProcedimentoNaoDeclaradoException;
 import loo1.plp.orientadaObjetos1.excecao.execucao.EntradaInvalidaException;
 import loo1.plp.orientadaObjetos1.expressao.ListaExpressao;
+import loo1.plp.orientadaObjetos1.expressao.valor.Valor;
 import loo1.plp.orientadaObjetos1.memoria.AmbienteCompilacaoOO1;
 import loo1.plp.orientadaObjetos1.memoria.AmbienteExecucaoOO1;
 import loo1.plp.orientadaObjetos1.memoria.colecao.ListaValor;
@@ -90,10 +93,21 @@ public class ChamadaProcedimento implements Comando {
         if(listaValor == null) {
             listaValor = parametrosReais.avaliar(ambiente);
         }
-        while (listaValor.length() > 0){
-            ambiente.map(parametrosFormais.getHead().getParametro().getId(), listaValor.getHead());
+        while (parametrosFormais != null && parametrosFormais.length() > 0){
+        	Valor valorParametro;
+        	Parametro parametroFormal = parametrosFormais.getHead().getParametro();
+        	
+        	if (listaValor.length() > 0) {
+        		valorParametro = listaValor.getHead();
+        		listaValor = (ListaValor) listaValor.getTail();
+        	}
+        	else {
+        		valorParametro = ((ParametroOpcional) parametroFormal).getValorPadrao().avaliar(ambiente);
+        	}
+        	
+            ambiente.map(parametroFormal.getId(), valorParametro);
             parametrosFormais = ((ListaDeclaracaoParametro) parametrosFormais.getTail());
-            listaValor = (ListaValor)listaValor.getTail();
+            
         }
         return ambiente;
     }

@@ -64,17 +64,19 @@ public class DecProcedimentoSimples implements  DecProcedimento {
        throws VariavelJaDeclaradaException, VariavelNaoDeclaradaException,
               ProcedimentoJaDeclaradoException, ProcedimentoNaoDeclaradoException,
               ClasseNaoDeclaradaException,ClasseJaDeclaradaException {
-       boolean resposta;
-        if(parametrosFormais.checaTipo(ambiente)) {
-            ambiente.mapParametrosProcedimento(nome, parametrosFormais);
-            ambiente.incrementa();
-            ambiente = parametrosFormais.declaraParametro(ambiente);
-            resposta = comando.checaTipo(ambiente);
-            ambiente.restaura();
-        }
-        else {
-            resposta = false;
-        }
-        return resposta;
+    	boolean resposta;
+    	ambiente.incrementa();
+       
+	    if(parametrosFormais.checaTipo(ambiente)) {
+	        ambiente.mapParametrosProcedimento(nome, parametrosFormais);
+	        resposta = comando.checaTipo(ambiente);
+	    }
+	    else {
+	        resposta = false;
+	    }
+	    
+	    ambiente.restaura();
+	    
+	    return resposta;
     }
 }

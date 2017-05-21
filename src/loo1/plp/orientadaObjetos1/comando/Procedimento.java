@@ -49,7 +49,7 @@ public class Procedimento {
     	
     	ListaDeclaracaoParametro listaParametrosAtual = parametrosFormais;
     	
-    	while (listaParametrosAtual != null)  {
+    	while (listaParametrosAtual != null && listaParametrosAtual.length() > 0)  {
     		Parametro parametroAtual = listaParametrosAtual.getHead().getParametro();
     		
     		if (parametroAtual instanceof ParametroRequerido) {

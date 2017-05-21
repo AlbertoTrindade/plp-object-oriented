@@ -1,7 +1,5 @@
 package loo1.plp.orientadaObjetos1.declaracao.procedimento;
 
-import loo1.plp.expressions2.memory.VariavelJaDeclaradaException;
-import loo1.plp.expressions2.memory.VariavelNaoDeclaradaException;
 import loo1.plp.orientadaObjetos1.excecao.declaracao.ClasseNaoDeclaradaException;
 import loo1.plp.orientadaObjetos1.memoria.AmbienteCompilacaoOO1;
 import loo1.plp.orientadaObjetos1.memoria.AmbienteExecucaoOO1;
@@ -61,25 +59,7 @@ public class DecParametro {
      */
     public boolean checaTipo(AmbienteCompilacaoOO1 ambiente)throws ClasseNaoDeclaradaException {
         return tipo.eValido(ambiente) && 
-        	   (!(parametro instanceof ParametroOpcional) || tipo.equals(((ParametroOpcional) parametro).getValorPadrao().getTipo(ambiente)));
-    }
-
-    /**
-     * Cria um mapeamento do identificador para o tipo do parametro
-     * desta declara��o no AmbienteCompilacao
-     *
-     * @param ambiente o ambiente que contem o mapeamento entre identificador
-     *  e seu tipo.
-     * @return o ambiente modificado pela declara��o do parametro.
-     */
-    public AmbienteCompilacaoOO1 declaraParametro(AmbienteCompilacaoOO1 ambiente)
-        throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException, ClasseNaoDeclaradaException {
-    	if (parametro instanceof ParametroOpcional) {
-        	ParametroOpcional parametroOpcional = (ParametroOpcional) parametro;
-        	parametroOpcional.getValorPadrao().checaTipo(ambiente);
-        }
-    	
-        ambiente.map(parametro.getId(), tipo);
-        return ambiente;
+        	   (!(parametro instanceof ParametroOpcional) || (tipo.equals(((ParametroOpcional) parametro).getValorPadrao().getTipo(ambiente)) &&
+        			   										 ((ParametroOpcional) parametro).getValorPadrao().checaTipo(ambiente)));
     }
 }
